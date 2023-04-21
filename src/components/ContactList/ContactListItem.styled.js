@@ -6,6 +6,10 @@ export const ContactItem = styled.li`
   margin-bottom: 10px;
 `;
 
+export const Name = styled.p`
+  width: 300px;
+`;
+
 export const DeleteButton = styled.button`
   margin-left: 20px;
   width: 60px;
