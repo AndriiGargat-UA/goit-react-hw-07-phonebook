@@ -1,7 +1,6 @@
-import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
-import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
+import { selectContacts } from 'redux/selectors';
 import {
   FormContainer,
   InputContainer,
@@ -10,12 +9,13 @@ import {
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const myContacts = useSelector(getContacts);
+  const myContacts = useSelector(selectContacts);
 
   const handleSubmit = event => {
     event.preventDefault();
     const name = event.target.name.value;
     const number = event.target.number.value;
+    const newContact = { name, number };
 
     const checkContact = myContacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
@@ -26,7 +26,6 @@ export const ContactForm = () => {
       return;
     }
 
-    const newContact = { id: nanoid(), name, number };
     dispatch(addContact(newContact));
     event.currentTarget.reset();
   };
